@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}About - BlogTown {% endblock title %}
+{% block body %}
+{% load static %}
+<!-- Page Header -->
+  <header class="masthead" style="background-image: url({% static 'img/about-bg.jpg' %})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>About Me</h1>
+            <span class="subheading">This is what I do.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <p>BlogTown is a blog-publishing service that allows multi-user blogs with time-stamped entries. It was developed by Naman Gupta in 2020.BlogTown also allowed users to publish blogs to their own web hosting server</p>
+        <h2></h2>
+      </div>
+    </div>
+  </div>
+{% endblock body %}

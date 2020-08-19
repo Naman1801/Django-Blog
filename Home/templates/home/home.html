@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% block title %} Top Blogs - BlogTown {% endblock title %}
+{% block css %}
+.btn{
+font-size: 11px;
+font-weight: 800;
+padding: 15px 18px;
+letter-spacing: 1px;
+}
+{% endblock css %}
+{% block body %}
+{% load static %}
+<!-- Page Header -->
+<header class="masthead" class="responsive" style="background-image: url({% static 'img/home-bg.jpg' %})">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="site-heading">
+          
+          <!-- <h1 class="jumbotron-heading"><span id="userTyped"></span></h1> -->
+          
+          <h1 class="jumbotron-heading"><span id="typed"></span></h1>
+          
+
+            <span class="subheading">(A Blogging App by Naman)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  {% for message in messages  %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      <strong></strong> {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+  <!-- Main Content  -->
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                  <h1>Treading Blogs</h1>
+                  {% for post in allPosts  %}
+                  <!-- <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"> -->
+                  <div class="post-preview">
+                    <a href="/blog/{{post.slug}}">
+                      <h2 class="post-title">
+                        {{post.title}}
+                      </h2>
+                      <h3 class="post-subtitle">
+                        {{post.subtitle}}
+                      </h3>
+                    </a>
+                    <p class="post-meta">Posted by
+                      <a href="#">{{post.author}}</a>
+                      on {{post.timeStamp}}</p>
+                  </div>
+                  {{post.content  | slice:":150" }}...
+                  <hr>
+                  {% endfor %}
+                  <br>
+
+                  <div class="size">
+                    {% if is_paginated %}
+
+                    {% if page_obj.has_previous %}
+
+                    <a class="btn btn-outline-info mb-2" href="?page=1">First</a>
+                    <a class="btn btn-outline-info mb-2" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                    <a class="btn btn-info mb-2" href="?page={{ num }}">{{ num }}</a>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a class="btn btn-outline-info mb-2" href="?page={{ num }}">{{ num }}</a>
+                    {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <a class="btn btn-outline-info mb-2 " href="?page={{ page_obj.next_page_number }}">Next</a>
+                    <a class="btn btn-outline-info mb-2" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                    {% endif %}
+
+                    {% endif %}
+
+
+                  </div>
+
+                  
+
+          
+                  {% block script %}
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.9/typed.min.js" async defer></script>
+                  <script>
+                    window.onload = function () {
+                      console.log("loaded")
+                      var typed = new Typed('#typed', {
+                        strings: ["Welcome to BlogTown","Good to see you :)" ,"Blogging the real world", "Creativity, Clarity, Happiness", "The future of communication starts here","I am Web Developer","I am Web Designer"],
+                        backSpeed: 15,
+                        smartBackspace: true,
+                        backDelay: 1200,
+                        startDelay: 1000,
+                        typeSpeed: 25,
+                        loop: true,
+                      });
+                       var userTyped = new Typed('#userTyped', {
+                        strings: ["We Welcome You {{request.user}}", "Good to see you :)", "I am Web Developer", "I am Web Designer","I Love to Code."],
+                        backSpeed: 15,
+                        smartBackspace: true,
+                        backDelay: 1200,
+                        startDelay: 1000,
+                        typeSpeed: 25,
+                        loop: true,
+                      });
+                    
+                    };
+                     </script>
+                  {% endblock script %}
+          
+                 
+                   
+                    
+                  
+                
+            
+                  
+
+                  <!-- Pager -->
+
+                  <!-- {% if prev %}
+          <a class="btn btn-primary float-left" href="/?page={{prev}}">&larr; Previous </a>
+        {% else %}
+          <a class="btn btn-primary float-left" href="#">&larr; Previous </a>
+        {% endif %}
+
+        {% if nxt %}
+        <a class="btn btn-primary float-right" href="/?page={{nxt}}">Next &rarr;</a>
+        {% else %}
+        <a class="btn btn-primary float-right" href="#">Next &rarr;</a>
+        {% endif %}
+
+        {% comment %} <div class="clearfix">
+          <a class="btn btn-primary float-left" href="{{prev}}">&larr; Previous </a>
+          <a class="btn btn-primary float-right" href="{{next}}">Next &rarr;</a>
+        </div> {% endcomment %}
+      </div>
+    </div>
+  </div> -->
+
+                  {% endblock body %}

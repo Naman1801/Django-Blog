@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %} Profile - {{ user.username }} {% endblock title %}
+{% load crispy_forms_tags %}
+{% block body %}
+{% load static %}
+ <header class="masthead" style="background-image: url({% static 'img/profile.jpg' %})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Profile</h1>
+            <span class="subheading">{{ user.username }}   Your Profile!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {% for message in messages  %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <strong></strong> {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+  
+    <!-- <div class="container mx-3 mx-auto"> -->
+    <div class="content-section col-md-8 mx-auto">
+     <div class="media">
+        <img class="rounded-circle " width=100 height=100 src="{{ user.profile.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.username }}</h2>
+          <p class="text-secondary">{{ user.email }}</p>
+        </div>
+        </div>
+      <!-- FORM HERE -->
+      <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Profile Info</legend>
+              <br>
+              {{ u_form|crispy }}
+              {{ p_form|crispy }}
+          </fieldset>
+          <br>
+          <div class="form-group">
+              <button class="btn btn-outline-info" type="submit">Update</button>
+          </div>
+      </form>
+    <!-- </div> -->
+    
+{% endblock body %}

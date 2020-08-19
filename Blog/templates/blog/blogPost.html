@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}{{post.title}} Post {% endblock title %}
+
+{% block body %} 
+{% load static %}
+
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url({{post.img.url}})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-heading">
+            <h1>{{post.title}}</h1>
+            <h2 class="subheading">{{post.subtitle}}</h2>
+            <span class="meta">Posted by
+              <a href="#">{{post.author}}</a>
+              on {{post.timeStamp}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+<!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <p>{{post.content}}</p>
+
+          <div class="fb-comments" data-href="http://127.0.0.1:8000/blog/{{post.slug}}" data-numposts="4" data-width=""></div>
+          <div class="fb-like" data-href="http://127.0.0.1:8000/blog/{{post.slug}}" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="true"></div>
+        
+        </div>
+      </div>
+    </div>
+  </article>
+
+  
+
+{% endblock body %}
